@@ -1,0 +1,37 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool: BMWindows
+
+steps:
+- script: cd AF-BM/UserMicroservice && docker build -t azza35/usermicroservice .
+  displayName: 'build'
+
+  
+- script: cd AF-BM/UserMicroservice && docker push azza35/usermicroservice 
+  displayName: 'push'
+
+
+
+# - script: cd AF-BM/UserMicroservice && dotnet restore
+#   displayName: 'Restore'
+  
+  
+# - script: cd AF-BM/UserMicroservice && dotnet build --no-restore
+#   displayName: 'Build'
+
+  
+# - script: cd AF-BM/UserMicroservice && dotnet publish --no-restore -c Release --output $(Agent.BuildDirectory)/publish
+#   displayName: 'Publish'
+
+
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#     PathtoPublish: '$(Agent.BuildDirectory)/publish'
+#     ArtifactName: 'app'
+#     publishLocation: 'Container'
